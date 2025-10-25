@@ -6,4 +6,18 @@ So I will prepare the network part:
 - https://circuitpython.org/board/raspberry_pi_pico2_w/
 
 
+```
+sudo apt update && sudo apt upgrade -y 
+sudo apt install -y mosquitto mosquitto-clients
+```
+
+
+```
+sudo systemctl enable mosquitto
+sudo systemctl start mosquitto
+sudo systemctl status mosquitto
+```
+
+
+
 
