@@ -19,13 +19,17 @@ sudo systemctl status mosquitto
 ```
 
 ```
+
 sudo apt install ufw
+sudo ufw enable
+sudo ufw reload
 sudo ufw allow 1883/tcp
 sudo ufw allow 1883/udp
 sudo ufw allow 7000/udp
 sudo ufw allow 3615/udp
 sudo ufw reload
 sudo ufw status
+
 ```
 
 
