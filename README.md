@@ -2,5 +2,8 @@
 
 > I want to make the 0H game jam but some spec of the concept I want to try need UDP and MicroPython
 
-So I will prepare the network part.
+So I will prepare the network part:
+- https://circuitpython.org/board/raspberry_pi_pico2_w/
+
+
 
