@@ -18,6 +18,13 @@ sudo systemctl start mosquitto
 sudo systemctl status mosquitto
 ```
 
+```
+sudo apt install ufw
+sudo ufw allow 1883/tcp
+sudo ufw reload
+sudo ufw status
+```
+
 
 
 
