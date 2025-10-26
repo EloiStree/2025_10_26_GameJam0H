@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lo4emuvx6gyo"
-path.etc2="res://.godot/imported/UFO_Body_D_ColorFull.png-17f51f4f953209fd734c30e2ac113462.etc2.ctex"
+path.s3tc="res://.godot/imported/UFO_Body_D_ColorFull.png-17f51f4f953209fd734c30e2ac113462.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/2025_04_15_gdp_kid_toy_ovni_code/2D/UFO_Body_D_ColorFull.png"
-dest_files=["res://.godot/imported/UFO_Body_D_ColorFull.png-17f51f4f953209fd734c30e2ac113462.etc2.ctex"]
+dest_files=["res://.godot/imported/UFO_Body_D_ColorFull.png-17f51f4f953209fd734c30e2ac113462.s3tc.ctex"]
 
 [params]
 

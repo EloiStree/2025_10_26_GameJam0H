@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5kl2ugec1p8m"
-path.etc2="res://.godot/imported/UFO_Glass_D.png-856ee95cb0c3114d4b99aa1baed95c82.etc2.ctex"
+path.s3tc="res://.godot/imported/UFO_Glass_D.png-856ee95cb0c3114d4b99aa1baed95c82.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/2025_04_15_gdp_kid_toy_ovni_code/2D/UFO_Glass_D.png"
-dest_files=["res://.godot/imported/UFO_Glass_D.png-856ee95cb0c3114d4b99aa1baed95c82.etc2.ctex"]
+dest_files=["res://.godot/imported/UFO_Glass_D.png-856ee95cb0c3114d4b99aa1baed95c82.s3tc.ctex"]
 
 [params]
 

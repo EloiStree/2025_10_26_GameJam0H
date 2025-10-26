@@ -3,16 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvdd7deug0yhe"
-path.etc2="res://.godot/imported/UFO_Body_D_GridBlenderUV.png-d84a8caee0714e40bf487431dd384685.etc2.ctex"
+path.s3tc="res://.godot/imported/UFO_Body_D_GridBlenderUV.png-d84a8caee0714e40bf487431dd384685.s3tc.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
+"imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/2025_04_15_gdp_kid_toy_ovni_code/2D/UFO_Body_D_GridBlenderUV.png"
-dest_files=["res://.godot/imported/UFO_Body_D_GridBlenderUV.png-d84a8caee0714e40bf487431dd384685.etc2.ctex"]
+dest_files=["res://.godot/imported/UFO_Body_D_GridBlenderUV.png-d84a8caee0714e40bf487431dd384685.s3tc.ctex"]
 
 [params]
 
