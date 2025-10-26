@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://0lfukth4fm6g"]
+
+[ext_resource type="Script" uid="uid://bdk5yqaqrbfi5" path="res://addons/2025_04_15_gdp_kid_toy_ovni_code/scripts/core/move/v001/ovni__move_drone_character_from_two_joysticks.gd" id="1_vjxvl"]
+[ext_resource type="Script" uid="uid://cbks0teotgjmh" path="res://addons/2025_04_15_gdp_kid_toy_ovni_code/scripts/core/input/ovni__drone_raw_input_to_vector2.gd" id="2_lsxoa"]
+[ext_resource type="PackedScene" uid="uid://w5squqreqcwt" path="res://addons/2025_04_15_gdp_kid_toy_ovni_code/scenes/elements/ui3d_player_ovni.tscn" id="3_ni474"]
+[ext_resource type="Script" uid="uid://y7beiex3501p" path="res://addons/2025_04_15_gdp_kid_toy_ovni_code/scripts/core/move/v000/ovni__move_drone_from_two_joysticks.gd" id="3_rpi88"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_o370j"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6slts"]
+radius = 0.0716785
+
+[node name="PlayerOvni" type="CharacterBody3D"]
+disable_mode = 2
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+motion_mode = 1
+script = ExtResource("1_vjxvl")
+
+[node name="Scripts" type="Node" parent="."]
+
+[node name="NodeInputToVector2" type="Node" parent="Scripts"]
+script = ExtResource("2_lsxoa")
+
+[node name="NodeBasicOvniMove" type="Node" parent="Scripts"]
+script = ExtResource("3_rpi88")
+move_speed = 2.0
+rotation_speed = 270.0
+vertical_speed = 1.8
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 6.04875e-06, -1.50616e-05, -2.4195e-05, 0.05, 1.32178e-05, 1.50616e-05, -3.30445e-06, 0.2, -0.00101066, -0.000609368, 0.000931382)
+visible = false
+mesh = SubResource("BoxMesh_o370j")
+
+[node name="PlayerOVNI" parent="." instance=ExtResource("3_ni474")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+process_mode = 3
+shape = SubResource("SphereShape3D_6slts")
+
+[connection signal="on_input_processed" from="Scripts/NodeInputToVector2" to="." method="set_drone_joysticks"]

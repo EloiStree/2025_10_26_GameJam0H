@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3wmfmhscq4th"]
+
+[ext_resource type="PackedScene" uid="uid://b7y10fygc08jr" path="res://_project/udp/scene/element/udp_in_listen_to_iid.tscn" id="1_sncmg"]
+[ext_resource type="PackedScene" uid="uid://ctuwyg67pwd4b" path="res://_project/udp/scene/element/udp_out_push_to_targets.tscn" id="2_pja8l"]
+
+[node name="Node" type="Node"]
+
+[node name="NodeListenToUdpIID" parent="." instance=ExtResource("1_sncmg")]
+
+[node name="NodePushOutToUdpTargets" parent="." instance=ExtResource("2_pja8l")]
