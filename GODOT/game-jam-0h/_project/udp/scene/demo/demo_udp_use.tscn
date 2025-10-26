@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2q2oify0cuuc"]
+[gd_scene load_steps=11 format=3 uid="uid://b2q2oify0cuuc"]
 
 [ext_resource type="PackedScene" uid="uid://b7y10fygc08jr" path="res://_project/udp/scene/element/udp_in_listen_to_iid.tscn" id="1_3pmm2"]
-[ext_resource type="PackedScene" uid="uid://l538hw2m04ju" path="res://addons/2025_04_15_gdp_kid_toy_ovni_code/scenes/elements/player_ovni_with_code_no_keyboard.tscn" id="1_i3ql2"]
 [ext_resource type="Script" uid="uid://dk8lbhqmmw5kr" path="res://_project/iid_to_players_gamepad/scripts/player_index_to_drone_move.gd" id="1_i7f7y"]
 [ext_resource type="PackedScene" uid="uid://ctuwyg67pwd4b" path="res://_project/udp/scene/element/udp_out_push_to_targets.tscn" id="2_v38ti"]
 [ext_resource type="PackedScene" uid="uid://tytogw3assh5" path="res://_project/iid_to_players_gamepad/scenes/elements/node_iid_to_players_gamepad.tscn" id="3_2paub"]
@@ -18,24 +17,9 @@ metadata/_custom_type_script = "uid://dvbximrtvt5ee"
 
 [node name="DemoUdpUse" type="Node3D"]
 
-[node name="NodeOtherPlayers" type="Node3D" parent="." node_paths=PackedStringArray("list_ovni_to_move")]
+[node name="NodeOtherPlayers" type="Node3D" parent="." node_paths=PackedStringArray("spawn_target")]
 script = ExtResource("1_i7f7y")
-list_ovni_to_move = [NodePath("PlayerOvni"), NodePath("PlayerOvni2"), NodePath("PlayerOvni3"), NodePath("PlayerOvni4"), NodePath("PlayerOvni5")]
-
-[node name="PlayerOvni" parent="NodeOtherPlayers" instance=ExtResource("1_i3ql2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.18728185, 0, 0)
-
-[node name="PlayerOvni2" parent="NodeOtherPlayers" instance=ExtResource("1_i3ql2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3745637, 0, 0)
-
-[node name="PlayerOvni3" parent="NodeOtherPlayers" instance=ExtResource("1_i3ql2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5549092, 0, 0)
-
-[node name="PlayerOvni4" parent="NodeOtherPlayers" instance=ExtResource("1_i3ql2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7352545, 0, 0)
-
-[node name="PlayerOvni5" parent="NodeOtherPlayers" instance=ExtResource("1_i3ql2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.94334567, 0, 0)
+spawn_target = NodePath(".")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.75089544, 0.66042113, 0, -0.66042113, 0.75089544, 0, 1.2387718, 0)
@@ -52,9 +36,8 @@ mesh = SubResource("BoxMesh_g31ld")
 script = ExtResource("4_3pmm2")
 player_base = SubResource("Resource_jawsg")
 
-[node name="NodeIndexGamepadToNodeOVNI" type="Node" parent="." node_paths=PackedStringArray("list_ovni_to_move")]
+[node name="NodeIndexGamepadToNodeOVNI" type="Node" parent="."]
 script = ExtResource("1_i7f7y")
-list_ovni_to_move = [NodePath("../NodeOtherPlayers/PlayerOvni"), NodePath("../NodeOtherPlayers/PlayerOvni2"), NodePath("../NodeOtherPlayers/PlayerOvni3"), NodePath("../NodeOtherPlayers/PlayerOvni4"), NodePath("../NodeOtherPlayers/PlayerOvni5")]
 
 [node name="PlayerOvniWithCameraIn" parent="." instance=ExtResource("7_i3ql2")]
 
