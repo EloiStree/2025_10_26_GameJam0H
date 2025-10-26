@@ -1,5 +1,14 @@
 # Game Jam 0H 2025
 
+Jam: https://itch.io/jam/zero-hour-game-jam-2025  
+Submission: https://eloistree.itch.io/pico-w-ovni  
+Fail: https://itch.io/jam/zero-hour-game-jam-2025/topic/5461595/post-your-missed-submissions-here  
+Post-Mortem: https://youtu.be/rNvknFmVE0s   
+
+[<img width="1067" height="596" alt="image" src="https://github.com/user-attachments/assets/376d988d-42d7-4949-b760-24f83ccaf93b" />](https://youtu.be/rNvknFmVE0s)  
+https://youtu.be/rNvknFmVE0s
+
+
 > I want to make the 0H game jam but some spec of the concept I want to try need UDP and MicroPython
 
 So I will prepare the network part:
