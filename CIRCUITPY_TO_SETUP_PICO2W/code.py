@@ -11,6 +11,9 @@ from player_main_code import update_code
 import os
 import microcontroller
 
+import adafruit_ntp
+import rtc
+
 def push_game_information_to_player_code(text:str):
     # player code is in the folder player_code_folder/player_main_code.py
     received_game_information(text)
@@ -49,6 +52,8 @@ MQTT_PORT = int(os.getenv('MQTT_PORT', '1883'))
 MQTT_TOPIC_IMPORT_CODE = os.getenv('MQTT_TOPIC_IMPORT_CODE', 'read_only/code_to_run')
 MQTT_TOPIC_RECOVERT_GAME_INFO = os.getenv('MQTT_TOPIC_RECOVERT_GAME_INFO', 'read_only/game_information')
 MQTT_YOUR_CLIENT_NAME = os.getenv('MQTT_YOUR_CLIENT_NAME', 'PICO_W2')
+
+NTP_SERVER = os.getenv('NTP_SERVER', '192.168.0.136')
 
 # Update variables for WiFi connection
 SSID = WIFI_SSID
@@ -113,6 +118,35 @@ ip_address = connect_to_wifi()
 # Create a socket pool for network connections
 pool = socketpool.SocketPool(wifi.radio)
 
+
+
+print("Querying NTP server: ", NTP_SERVER)
+ntp = adafruit_ntp.NTP(pool, server=NTP_SERVER, tz_offset=0)  # UTC
+
+# ======== Get NTP Time with nanosecond precision ========
+ntp_unix_ns = ntp.utc_ns  # returns nanoseconds since epoch
+ntp_unix = ntp_unix_ns / 1_000_000_000  # convert to seconds with decimal precision
+
+# ======== Get Local Device Time with millisecond precision ========
+local_unix = time.monotonic()  # seconds since boot
+
+# ======== Calculate Difference with millisecond precision ========
+difference_ms = (ntp_unix - local_unix) * 1000
+print("NTP time (UTC):", time.localtime(int(ntp_unix)))
+print("Local monotonic time:", local_unix, "seconds since boot")
+print("Time difference:", f"{difference_ms:.3f}", "ms")
+
+# ======== Optionally Set RTC to NTP Time ========
+ntp_time = time.localtime(int(ntp_unix))
+rtc.RTC().datetime = ntp_time
+print("RTC updated with NTP time.")
+
+
+
+
+
+
+
 # Initialize MQTT client
 mqtt_client = MQTT.MQTT(
     broker=MQTT_BROKER,
@@ -128,7 +162,8 @@ check_pi_on_with_board_led()
 # Set callback for incoming messages
 mqtt_client.on_message = mqtt_message
 
-print("> Connecting to MQTT broker...")
+print("> Connecting to MQTT broker:", MQTT_BROKER)
+print("  Client name:", MQTT_YOUR_CLIENT_NAME_WITH_IP)
 mqtt_client.connect()
 print("< Connected to MQTT broker...")
 
