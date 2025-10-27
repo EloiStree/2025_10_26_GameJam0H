@@ -20,7 +20,3 @@ config/icon="res://icon.svg"
 window/size/viewport_width=640
 window/size/viewport_height=360
 window/size/borderless=true
-
-[rendering]
-
-renderer/rendering_method="mobile"

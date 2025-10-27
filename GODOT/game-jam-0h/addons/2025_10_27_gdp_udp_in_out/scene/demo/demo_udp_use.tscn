@@ -1,0 +1,57 @@
+[gd_scene load_steps=13 format=3 uid="uid://b2q2oify0cuuc"]
+
+[ext_resource type="PackedScene" uid="uid://b7y10fygc08jr" path="res://addons/2025_10_27_gdp_udp_in_out/scene/element/udp_in_listen_to_iid.tscn" id="1_3pmm2"]
+[ext_resource type="Script" uid="uid://dk8lbhqmmw5kr" path="res://addons/2025_10_26_iid_to_players_gamepad_and_keyboard/scripts/player_index_to_drone_move.gd" id="1_i7f7y"]
+[ext_resource type="PackedScene" uid="uid://ctuwyg67pwd4b" path="res://addons/2025_10_27_gdp_udp_in_out/scene/element/udp_out_push_to_targets.tscn" id="2_v38ti"]
+[ext_resource type="PackedScene" uid="uid://tytogw3assh5" path="res://addons/2025_10_26_iid_to_players_gamepad_and_keyboard/scenes/elements/node_iid_to_players_gamepad.tscn" id="3_2paub"]
+[ext_resource type="Script" uid="uid://c2ltp6invtipl" path="res://addons/2025_10_26_iid_to_players_gamepad_and_keyboard/scripts/node_iid_players_gamepad.gd" id="4_3pmm2"]
+[ext_resource type="Script" uid="uid://dvbximrtvt5ee" path="res://addons/2025_10_26_iid_to_players_gamepad_and_keyboard/scripts/iid_to_players_gamepad.gd" id="4_jawsg"]
+[ext_resource type="Script" uid="uid://bqhe6lapol4xq" path="res://addons/2025_10_26_iid_to_players_gamepad_and_keyboard/scripts/player_gamepad_axis_info.gd" id="5_2paub"]
+[ext_resource type="PackedScene" uid="uid://bggdtykh4nrm1" path="res://addons/2025_04_15_gdp_kid_toy_ovni_code/scenes/elements/player_ovni_with_camera_in.tscn" id="7_i3ql2"]
+[ext_resource type="Script" uid="uid://b8mqtoean1po3" path="res://addons/2025_10_27_gdp_trusted_websocket_client/scripts/TrustedWebsocketClient.gd" id="9_kjbur"]
+[ext_resource type="Script" uid="uid://c3h7ovxoho3h" path="res://addons/2025_10_27_gdp_trusted_websocket_client/scripts/WsReconnectTickTimer.gd" id="10_o6ej5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_g31ld"]
+
+[sub_resource type="Resource" id="Resource_jawsg"]
+script = ExtResource("4_jawsg")
+metadata/_custom_type_script = "uid://dvbximrtvt5ee"
+
+[node name="DemoUdpUse" type="Node3D"]
+
+[node name="NodeOtherPlayers" type="Node3D" parent="." node_paths=PackedStringArray("spawn_target")]
+script = ExtResource("1_i7f7y")
+spawn_target = NodePath(".")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.75089544, 0.66042113, 0, -0.66042113, 0.75089544, 0, 1.2387718, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.51725936, 0, 0, 0, 0.51725936, 0, 0, 0, 0.51725936, 0, 0, -1.7275952)
+mesh = SubResource("BoxMesh_g31ld")
+
+[node name="NodeListenToUdpIID" parent="." instance=ExtResource("1_3pmm2")]
+
+[node name="NodePushOutToUdpTargets" parent="." instance=ExtResource("2_v38ti")]
+
+[node name="NodeIidToPlayersGamepad" parent="." instance=ExtResource("3_2paub")]
+script = ExtResource("4_3pmm2")
+player_base = SubResource("Resource_jawsg")
+
+[node name="NodeIndexGamepadToNodeOVNI" type="Node" parent="."]
+script = ExtResource("1_i7f7y")
+
+[node name="PlayerOvniWithCameraIn" parent="." instance=ExtResource("7_i3ql2")]
+
+[node name="TrustedWebSocketClient" type="Node" parent="."]
+script = ExtResource("9_kjbur")
+hello_message = "Hello World"
+metadata/_custom_type_script = "uid://b8mqtoean1po3"
+
+[node name="TickTimer" type="Node" parent="TrustedWebSocketClient"]
+script = ExtResource("10_o6ej5")
+metadata/_custom_type_script = "uid://c3h7ovxoho3h"
+
+[connection signal="on_iid_data_received" from="NodeListenToUdpIID" to="NodeIidToPlayersGamepad" method="push_in_index_value_date"]
+[connection signal="on_player_gamepad_updated" from="NodeIidToPlayersGamepad" to="NodeIndexGamepadToNodeOVNI" method="push_in_gamepad"]
+[connection signal="tick" from="TrustedWebSocketClient/TickTimer" to="TrustedWebSocketClient" method="ensure_connected"]

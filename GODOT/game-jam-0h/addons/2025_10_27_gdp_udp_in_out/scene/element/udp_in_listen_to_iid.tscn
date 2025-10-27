@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7y10fygc08jr"]
+
+[ext_resource type="Script" uid="uid://pmv65oyv8r1" path="res://addons/2025_10_27_gdp_udp_in_out/scripts/listen_udp_in_iid.gd" id="1_uci2o"]
+
+[node name="NodeListenToUdpIID" type="Node"]
+script = ExtResource("1_uci2o")

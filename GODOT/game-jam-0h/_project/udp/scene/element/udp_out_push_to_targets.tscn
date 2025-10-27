@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctuwyg67pwd4b"]
-
-[ext_resource type="Script" uid="uid://bys2rkc1d61oa" path="res://_project/udp/push_udp_out_targets.gd" id="1_fsgo7"]
-
-[node name="NodePushOutToUdpTargets" type="Node"]
-script = ExtResource("1_fsgo7")
