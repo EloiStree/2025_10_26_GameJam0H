@@ -1,0 +1,73 @@
+import math
+
+"""
+Player Claimed ID | Game Index 0 | Position (Float 3)| Direction (Float 3) | Euler Rotation (Float 3) | Quaternion Rotation (Float 4) | Scale (float)
+"""
+class GameEnginePlayerPosition:
+    def __init__(self):
+        self.int_player_claimed_id = 0  # int
+        self.int_in_game_index = 0  # int
+        self.float3_position = [0.0, 0.0, 0.0]  # float 3
+        self.float4_quaternion_rotation = [0.0, 0.0, 0.0, 0.0]  # float 4
+        self.float_scale = 1.0  # float
+        self.float3_direction = [0.0, 0.0, 0.0]  # float 3
+        self.float3_euler_rotation = [0.0, 0.0, 0.0]  # float 3
+
+
+    #def set without direction and euler rotation as it can be calculated from the quaternion
+    def set_basic(self, player_claimed_id:int, in_game_index:int, position:list[float], quaternion_rotation:list[float], scale:float):
+        self.int_player_claimed_id = player_claimed_id
+        self.int_in_game_index = in_game_index
+        self.float3_position = position
+        self.float4_quaternion_rotation = quaternion_rotation
+        self.float_scale = scale
+        self.float3_direction = [0.0, 0.0, 0.0]
+        self.float3_euler_rotation = [0.0, 0.0, 0.0]
+
+        # Calculate direction from quaternion (forward vector)
+
+        # Quaternion to direction (forward vector)
+        x, y, z, w = quaternion_rotation
+        self.float3_direction = [
+            2 * (x * z + w * y),
+            2 * (y * z - w * x), 
+            1 - 2 * (x * x + y * y)
+        ]
+        
+
+        # Quaternion to Euler angles (ZYX order)
+        # Roll (x-axis rotation)
+        sinr_cosp = 2 * (w * x + y * z)
+        cosr_cosp = 1 - 2 * (x * x + y * y)
+        roll = math.atan2(sinr_cosp, cosr_cosp)
+
+        # Pitch (y-axis rotation)
+        sinp = 2 * (w * y - z * x)
+        if abs(sinp) >= 1:
+            pitch = math.copysign(math.pi / 2, sinp)
+        else:
+            pitch = math.asin(sinp)
+
+        # Yaw (z-axis rotation)
+        siny_cosp = 2 * (w * z + x * y)
+        cosy_cosp = 1 - 2 * (y * y + z * z)
+        yaw = math.atan2(siny_cosp, cosy_cosp)
+
+        # Convert radians to degrees
+        self.float3_euler_rotation = [math.degrees(roll), math.degrees(pitch), math.degrees(yaw)]
+
+
+
+
+class PlayerPositionParser:
+
+    @staticmethod
+    def parse_player_position(byte_array: bytearray) -> tuple[int, int]:
+        """Parse player position from byte array and return (x, y) coordinates."""
+        if len(byte_array) != 8:
+            raise ValueError("Invalid byte array length for player position.")
+        
+        x = int.from_bytes(byte_array[0:4], 'big', signed=True)
+        y = int.from_bytes(byte_array[4:8], 'big', signed=True)
+        
+        return (x, y)
