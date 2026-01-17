@@ -42,5 +42,23 @@ sudo ufw status
 ```
 
 
+```
+sudo systemctl edit mosquitto
+
+[Service]
+Restart=always
+RestartSec=5
+
+sudo systemctl daemon-reload
+sudo systemctl restart mosquitto
+systemctl cat mosquitto
+
+```
+
+--------------
+
+Websocket and UDP Receiver for Pico W:    
+[https://github.com/intGus/cpwebsockets](https://github.com/intGus/cpwebsockets)  
+
 
 
